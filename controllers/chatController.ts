@@ -6,15 +6,14 @@ import { ChatHistory } from "../models";
 //  Create a new chat history
 export const createChatHistory = async (req: Request, res: Response) => {
   try {
-    const { firstMessage, creatorWalletAddress } = req.body;
+    const { title, creatorWalletAddress } = req.body;
     const newChatHistory = (
       await ChatHistory.create({
-        first_message: firstMessage,
+        title,
         creator_wallet_address: creatorWalletAddress
       })
     ).dataValues;
 
-    console.log(">>>>>>>>>>>> newChatHistory => ", newChatHistory);
     return res.send(newChatHistory);
   } catch (error) {
     console.log(">>>>>>>>>>>> error of createChatHistory => ", error);
@@ -53,6 +52,31 @@ export const deleteChatHistory = async (req: Request, res: Response) => {
     return res.sendStatus(200);
   } catch (error) {
     console.log(">>>>>>>>>>>> error of deleteChatHistory => ", error);
+    return res.sendStatus(500);
+  }
+};
+
+//  Get a user's chat histories
+export const getChatHistories = async (req: Request, res: Response) => {
+  try {
+    const { creatorWalletAddress } = req.params;
+    const chatHistories = await ChatHistory.findAll({
+      where: {
+        creator_wallet_address: creatorWalletAddress
+      }
+    });
+    return res.send(chatHistories);
+  } catch (error) {
+    console.log(">>>>>>>>>>>> error of getChatHistories => ", error);
+    return res.sendStatus(500);
+  }
+};
+
+export const updateTitleOfChatHistory = async (req: Request, res: Response) => {
+  try {
+    
+  } catch (error) {
+    console.log(">>>>>>>>>>>> error of getChatHistories => ", error);
     return res.sendStatus(500);
   }
 };

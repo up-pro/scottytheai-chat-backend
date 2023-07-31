@@ -17,7 +17,7 @@ app.use(
 app.use(express.json());
 
 // Define Routes
-app.use("/api/chat", require("./routes/messageRoutes"));
+app.use("/api/chat", require("./routes/chatRoutes"));
 
 const PORT = process.env.PORT || 5000;
 
