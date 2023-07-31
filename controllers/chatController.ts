@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { ChatHistory } from "../models";
+import { getCurrentDate } from "../utils/functions";
 
 //  --------------------------------------------------------------------------------------------------------------------
 
@@ -7,10 +8,13 @@ import { ChatHistory } from "../models";
 export const createChatHistory = async (req: Request, res: Response) => {
   try {
     const { title, creatorWalletAddress } = req.body;
+    const currentDate = getCurrentDate();
     const newChatHistory = (
       await ChatHistory.create({
         title,
-        creator_wallet_address: creatorWalletAddress
+        creator_wallet_address: creatorWalletAddress,
+        created_date: currentDate,
+        updated_date: currentDate
       })
     ).dataValues;
 
@@ -25,10 +29,12 @@ export const createChatHistory = async (req: Request, res: Response) => {
 export const saveMessages = async (req: Request, res: Response) => {
   try {
     const { chatHistoryId, messages } = req.body;
+    const currentDate = getCurrentDate();
 
     await ChatHistory.update(
       {
-        messages: JSON.stringify(messages)
+        messages: JSON.stringify(messages),
+        updated_date: currentDate
       },
       {
         where: {
@@ -63,7 +69,9 @@ export const getChatHistories = async (req: Request, res: Response) => {
     const chatHistories = await ChatHistory.findAll({
       where: {
         creator_wallet_address: creatorWalletAddress
-      }
+      },
+      order: [["updated_at", "DESC"]],
+      group: "updated_date"
     });
     return res.send(chatHistories);
   } catch (error) {
@@ -74,7 +82,6 @@ export const getChatHistories = async (req: Request, res: Response) => {
 
 export const updateTitleOfChatHistory = async (req: Request, res: Response) => {
   try {
-    
   } catch (error) {
     console.log(">>>>>>>>>>>> error of getChatHistories => ", error);
     return res.sendStatus(500);

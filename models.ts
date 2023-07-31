@@ -20,5 +20,7 @@ const sequelize = new Sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD, {
 export const ChatHistory = sequelize.define("chat_histories", {
   title: DataTypes.TEXT,
   creator_wallet_address: DataTypes.STRING,
-  messages: DataTypes.TEXT
+  messages: DataTypes.TEXT,
+  created_date: DataTypes.DATE,
+  updated_date: DataTypes.DATE
 });
