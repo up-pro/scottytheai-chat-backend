@@ -62,13 +62,21 @@ export const IdoInvestment = sequelize.define(
 export const IdoSaleStage = sequelize.define(
   "ido_sale_stages",
   {
-    stage_name: DataTypes.STRING,
-    stage_enabled: DataTypes.STRING,
+    name: DataTypes.STRING,
+    enabled: DataTypes.STRING,
     scotty_price_in_usd: DataTypes.DECIMAL,
     hard_cap: DataTypes.DECIMAL,
     claimed_scotty_amount: DataTypes.DECIMAL,
     start_at: DataTypes.DATE,
     end_at: DataTypes.DATE
+  },
+  { timestamps: false }
+);
+
+export const IdoClaimScottyStatus = sequelize.define(
+  "ido_claim_scotty_status",
+  {
+    claim_scotty_enabled: DataTypes.STRING
   },
   { timestamps: false }
 );
