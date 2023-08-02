@@ -66,12 +66,12 @@ export const deleteChatHistory = async (req: Request, res: Response) => {
 export const getChatHistories = async (req: Request, res: Response) => {
   try {
     const { creatorWalletAddress } = req.params;
+
     const chatHistories = await ChatHistory.findAll({
       where: {
         creator_wallet_address: creatorWalletAddress
       },
-      order: [["updated_at", "DESC"]],
-      group: "updated_date"
+      order: [["updated_at", "DESC"]]
     });
     return res.send(chatHistories);
   } catch (error) {

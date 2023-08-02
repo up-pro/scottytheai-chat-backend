@@ -1,7 +1,7 @@
 {
-  "name": "scottytheai-chat-backend",
+  "name": "scottytheai-backend",
   "version": "1.0.0",
-  "description": "The backend of scottytheai chat",
+  "description": "The backend of scottytheai",
   "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/silivex/scottytheai-chat-backend.git"
+    "url": "git+https://github.com/silivex/scottytheai-backend.git"
   },
   "keywords": [
     "gls"
@@ -19,9 +19,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/silivex/scottytheai-chat-backend/issues"
+    "url": "https://github.com/silivex/scottytheai-backend/issues"
   },
-  "homepage": "https://github.com/silivex/scottytheai-chat-backend#readme",
+  "homepage": "https://github.com/silivex/scottytheai-backend#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "concurrently": "^7.6.0",
