@@ -1,8 +1,9 @@
 import express, { Router } from "express";
-import { invest } from "../controllers/idoController";
+import { getInvestedTokens, invest } from "../controllers/idoController";
 
 const router: Router = express.Router();
 
 router.post("/invest", invest);
+router.get('/get-invested-tokens', getInvestedTokens)
 
 module.exports = router;

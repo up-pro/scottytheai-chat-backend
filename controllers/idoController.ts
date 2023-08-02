@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import {
   IdoClaimableScottyAmountOfInvestor,
+  IdoInvestedToken,
   IdoInvestment,
   IdoSaleStage
 } from "../models";
@@ -141,6 +142,16 @@ export const invest = async (req: Request, res: Response) => {
     return res.sendStatus(200);
   } catch (error) {
     console.log(">>>>>>>>>>>>>>> error of invest => ", error);
+    return res.sendStatus(500);
+  }
+};
+
+export const getInvestedTokens = async (req: Request, res: Response) => {
+  try {
+    const investedTokens = await IdoInvestedToken.findAll();
+    return res.send(investedTokens);
+  } catch (error) {
+    console.log(">>>>>>>>>>>>>>> error of getInvestedTokens => ", error);
     return res.sendStatus(500);
   }
 };
