@@ -27,6 +27,8 @@ export const invest = async (req: Request, res: Response) => {
       saleStageId
     } = req.body;
 
+    console.log(">>>>>>>> req.body => ", req.body);
+
     //  The data of current sale stage
     const idoSaleStageData = (
       await IdoSaleStage.findOne({
@@ -301,6 +303,52 @@ export const getClaimScottyStatus = async (req: Request, res: Response) => {
     return res.send(idoClaimScottyStatusData);
   } catch (error) {
     console.log(">>>>>>>>>>>>>>> error of getClaimScottyStatus => ", error);
+    return res.sendStatus(500);
+  }
+};
+
+/**
+ * Get invested token raised
+ */
+export const getInvestedTokenRaised = async (req: Request, res: Response) => {
+  try {
+    const { investedTokenId } = req.params;
+
+    const raisedAmount = await IdoInvestment.sum("invested_token_amount", {
+      where: { id_invested_token: investedTokenId }
+    });
+
+    return res.send({ raisedAmount });
+  } catch (error) {
+    console.log(">>>>>>>>>>>>>>> error of getInvestedTokenRaised => ", error);
+    return res.sendStatus(500);
+  }
+};
+
+/**
+ * Get sale data
+ */
+export const getSaleData = async (req: Request, res: Response) => {
+  try {
+    const { investedTokenId } = req.params;
+
+    const raisedAmount = await IdoInvestment.sum("invested_token_amount", {
+      where: { id_invested_token: investedTokenId }
+    });
+    const enabledSaleStage = await IdoSaleStage.findOne({
+      where: { enabled: "true" }
+    });
+    const claimScottyStatusData = await IdoClaimScottyStatus.findOne({
+      where: { id: 1 }
+    });
+
+    return res.send({
+      raisedAmount,
+      enabledSaleStage,
+      claimScottyStatusData
+    });
+  } catch (error) {
+    console.log(">>>>>>>>>>>>>>> error of getSaleData => ", error);
     return res.sendStatus(500);
   }
 };

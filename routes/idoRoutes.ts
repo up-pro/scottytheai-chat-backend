@@ -4,7 +4,9 @@ import {
   getClaimScottyStatus,
   getClaimableScottyAmountOfInvestor,
   getEnabledSaleStage,
+  getInvestedTokenRaised,
   getInvestedTokens,
+  getSaleData,
   invest
 } from "../controllers/idoController";
 
@@ -18,6 +20,11 @@ router.get(
   getClaimableScottyAmountOfInvestor
 );
 router.get("/get-claim-scotty-status", getClaimScottyStatus);
+router.get(
+  "/get-invested-token-raised/:investedTokenId",
+  getInvestedTokenRaised
+);
+router.get("/get-sale-data/:investedTokenId", getSaleData);
 
 //  Admin
 router.put("/enable-sale-stage/:id", enableSaleStage);

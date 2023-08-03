@@ -42,7 +42,8 @@ export const IdoInvestedToken = sequelize.define(
   "ido_invested_tokens",
   {
     token_name: DataTypes.STRING,
-    token_symbol: DataTypes.STRING
+    token_symbol: DataTypes.STRING,
+    img_src: DataTypes.TEXT
   },
   { timestamps: false }
 );
